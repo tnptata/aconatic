@@ -56,24 +56,9 @@
                     </div> 
                 </div>
 
-                <div class="md:col-span-2">
-                    <label for="status">Recommend Products</label>
-                    <select name="status" id="status" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
-                        @foreach($product_status as $status)
-                            <option value="{{ $status }}" {{ old('status') === $status ? "selected": ""}}>{{ $status }}</option>
-                        @endforeach
-                    </select>
-                </div>
 
-                <div class="md:col-span-1">
-                    <label for="amount">Amount</label>
-                    <input type="number" name="amount" placeholder="Amount" autocomplete="off"  class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50 @error('detail') border-red-400 @enderror" placeholder="Amount" value="{{ old('amount', $product->amount) }}" />
-                    @error('amount')
-                    <div class="text-red-600">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
+
+
 
                 <div class="md:col-span-1">
                     <label for="cost">Cost</label>

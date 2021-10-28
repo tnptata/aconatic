@@ -17,7 +17,4 @@ class Product extends Model
         return $this->hasMany(Warranty::class);
     }
 
-    public function buylists(){
-        return $this->hasMany(Buylist::class);
-    }
 }

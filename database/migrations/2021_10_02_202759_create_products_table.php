@@ -17,10 +17,8 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->double('cost');
-            $table->integer('amount');
             $table->string('detail');
             $table->enum('type',['Television','Speaker','Portable_air','Camera']);
-            $table->enum('status',['Recommend','Normal']);
             $table->string('product_image');
             $table->timestamps();
             $table->softDeletes();

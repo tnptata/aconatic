@@ -37,8 +37,7 @@ class ProductController extends Controller
     {
         $this->authorize('create', Product::class);
         $product_types = Product::$product_types;
-        $product_status = Product::$product_status;
-        return view('products.create', ['product_types' => $product_types],['product_status' => $product_status]);
+        return view('products.create', ['product_types' => $product_types]);
     }
 
     /**
@@ -53,10 +52,8 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->input('name');
         $product->cost = $request->input('cost');
-        $product->amount = $request->input('amount');
         $product->detail = $request->input('detail');
         $product->type = $request->input('type');
-        $product->status = $request->input('status');
         if ($request->hasFile('product_image')) {
             $file = $request->file('product_image');
             $extention = $file->getClientOriginalExtension();
@@ -91,11 +88,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        $product_status = Product::$product_status;
         $this->authorize('update', $product);
         return view('products.edit', [
-            'product' => $product,
-            'product_status' => $product_status
+            'product' => $product
         ]);
     }
 
@@ -113,9 +108,7 @@ class ProductController extends Controller
         $this->authorize('update', $product);
         $product->name= $request->input('name');
         $product->cost = $request->input('cost');
-        $product->amount = $request->input('amount');
         $product->detail = $request->input('detail');
-        $product->status = $request->input('status');
         if ($request->hasFile('product_image')) {
             $destination = 'uploads/products/'.$product->product_image;
             if(File::exists($destination))
@@ -146,10 +139,7 @@ class ProductController extends Controller
     }
 
     
-    public function home(){
-        $products = Product::latest('created_at')->get();
-        return view('home', ['products' => $products]);
-    }
+
 
     public function indexcustomer()
         {
@@ -181,38 +171,7 @@ class ProductController extends Controller
         return view('products.groupcamera', ['products' => $products]);
     }
 
-    public function buy(BuyRequest $request, $id){
-        $product = Product::find($id);
-        return view('products.buy',[
-            'product' => $product,
-            'amount' => $request->input('amount')
-        ]);
-    }
 
-    public function confirm($id, $cost){
-        $user = User::findorFail(Auth::user()->id);
-        $buylist = new Buylist();
-        $product = Product::find($id);
-        $amount = $cost/$product->cost;
-        $product->amount -= $amount;
-        $user->money -= $cost; 
-        $product->save();
-        $user->save();
-        $buylist->user_id = $user->id;
-        $buylist->product_id = $product->id;
-        $buylist->buy_date = Carbon::now()->format('Y-m-d');
-        $buylist->amount = $amount;
-        $buylist->save();
-        for($i = 0;$i<$cost/$product->cost;$i++){
-            $warranty = new Warranty();
-            $warranty->start_date = Carbon::now()->format('Y-m-d');
-            $warranty->expire_date = Carbon::now()->addYears(1)->format('Y-m-d');
-            $warranty->user_id = $user->id;
-            $warranty->product_id = $product->id;
-            $warranty->save();
-        }
-        return redirect()->route('home');
-    }
 
     
     

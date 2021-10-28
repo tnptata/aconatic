@@ -63,12 +63,7 @@ class User extends Authenticatable
         return $this->isRole('CUSTOMER');
     }
 
-    public function money()
-    {
-        return $this->money;
-    }
 
-    public function buylists(){
-        return $this->hasMany(Buylist::class);
-    }
+
+
 }
