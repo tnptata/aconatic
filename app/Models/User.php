@@ -41,27 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function warranties(){
-        return $this->hasMany(Warranty::class);
-    }
 
-    public function isRole($role):bool{
-        return $this->role === $role;
-    }
 
-    public function isAdmin():bool{
-        return $this->isRole('ADMIN');
-    }
-
-    public function isOffice(): bool
-    {
-        return $this->isRole('OFFICER');
-    }
-
-    public function isCustomer(): bool
-    {
-        return $this->isRole('CUSTOMER');
-    }
 
 
 

@@ -15,7 +15,7 @@ class CreateWarrantiesTable extends Migration
     {
         Schema::create('warranties', function (Blueprint $table) {
             $table->id("serial_number");
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Customer::class);
             $table->foreignIdFor(\App\Models\Product::class);
             $table->date("start_date");
             $table->date("expire_date");

@@ -23,7 +23,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::latest('created_at')->get();
+        return view('products.index', ['products' => $products]);
     }
 
 
@@ -35,7 +36,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Product::class);
+
         $product_types = Product::$product_types;
         return view('products.create', ['product_types' => $product_types]);
     }
@@ -48,7 +49,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $this->authorize('create', Product::class);
+
         $product = new Product();
         $product->name = $request->input('name');
         $product->cost = $request->input('cost');
@@ -62,7 +63,7 @@ class ProductController extends Controller
             $product->product_image = $filename;
         }
         $product->save();
-        return redirect()->route('indexcustomer');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -88,7 +89,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        $this->authorize('update', $product);
+
         return view('products.edit', [
             'product' => $product
         ]);
@@ -105,7 +106,7 @@ class ProductController extends Controller
     {
         
         $product = Product::findOrFail($id);
-        $this->authorize('update', $product);
+
         $product->name= $request->input('name');
         $product->cost = $request->input('cost');
         $product->detail = $request->input('detail');
@@ -133,19 +134,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-        return redirect()->route('indexcustomer');
+
     }
 
     
 
 
-    public function indexcustomer()
-        {
-            $products = Product::latest('created_at')->get();
-            return view('products.indexcustomer', ['products' => $products]);
-        }
+
 
     public function grouptelevision()
     {

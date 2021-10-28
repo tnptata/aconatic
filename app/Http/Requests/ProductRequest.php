@@ -28,7 +28,6 @@ class ProductRequest extends FormRequest
         return [
             'name' => ['required'],
             'cost' => ['required', 'integer', 'min:1'],
-            'amount' => ['required', 'integer', 'min:1'],
             'detail' => ['required'],
             'type' => [Rule::in(Product::$product_types)],
         ];
@@ -39,8 +38,6 @@ class ProductRequest extends FormRequest
             'name.required' => "Please fill product name.",
             'cost.required' => "Please fill price.",
             'cost.min' => "Minimun of price is 1",
-            'amount.required' => "Please fill quantity.",
-            'amount.min' => "Minimun of quantity is 1",
             'detail.required' => "Please fill product detail.",
             'type.required' => "Please select product type.",
             'product_image.required' => "Please choose product photo."

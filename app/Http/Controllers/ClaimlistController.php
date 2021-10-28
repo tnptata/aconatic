@@ -18,7 +18,7 @@ class ClaimlistController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->isAdmin() || Auth::user()->isOffice()){
+        if(Auth::check()){
             $claimlists = Claimlist::with('warranty')->get();
         return view('claims.index',['claimlists' => $claimlists]);
         }else{
@@ -34,11 +34,8 @@ class ClaimlistController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->isAdmin() || Auth::user()->isOffice()){
-            return view('claims.create');
-        }else{
-            abort(403, 'Unauthorized action.');
-        }
+        return view('claims.create');
+
         
     }
 
@@ -50,17 +47,14 @@ class ClaimlistController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->isAdmin() || Auth::user()->isOffice()){
-           $claim = new Claimlist();
+        $claim = new Claimlist();
         $claim->warranty_id = $request->input('serial_number');
         $claim->date = Carbon::now()->format('Y-m-d');
         $claim->status = $request->input('status');
         $claim->damage = $request->input('damage');
         $claim->save();
         return redirect()->route('claims.show', ['claim'=> $claim->id]); 
-        }else{
-            abort(403, 'Unauthorized action.');
-        }
+
         
     }
 
@@ -72,14 +66,12 @@ class ClaimlistController extends Controller
      */
     public function show($id)
     {
-        if(Auth::user()->isAdmin() || Auth::user()->isOffice()){
-             $claimlist = Claimlist::with('warranty')->findOrFail($id);
+
+            $claimlist = Claimlist::with('warranty')->findOrFail($id);
         return view('claims.show',[
             'claimlist' => $claimlist
         ]);
-        }else{
-            abort(403, 'Unauthorized action.');
-        }
+
 
        
     
@@ -93,17 +85,14 @@ class ClaimlistController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::user()->isAdmin() || Auth::user()->isOffice()){
+
             $claimlist = Claimlist::findOrFail($id);
         $statuses = Claimlist::$statuses;
-        $this->authorize('update', $claimlist);
         return view('claims.edit', [
             'claimlist' => $claimlist,
             'statuses' => $statuses
         ]);
-        }else{
-            abort(403, 'Unauthorized action.');
-        }
+
         
     }
 
@@ -116,17 +105,14 @@ class ClaimlistController extends Controller
      */
     public function update(ClaimlistRequest $request, $id)
     {
-        if(Auth::user()->isAdmin() || Auth::user()->isOffice()){
-            $claimlist = Claimlist::findOrFail($id);
-        $this->authorize('update', $claimlist);
+
+        $claimlist = Claimlist::findOrFail($id);
         $claimlist->status = $request->input('status');
         $claimlist->damage = $request->input('damage');
         $claimlist->repair_condition = $request->input('repair_condition');
         $claimlist->save();
         return redirect()->route('claims.show', ['claim' => $id]);
-        }else{
-            abort(403, 'Unauthorized action.');
-        }
+
         
     }
 

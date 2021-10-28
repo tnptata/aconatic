@@ -13,16 +13,7 @@
 
 
 <!---------------------------------------- Add items -------------------------------->
-<form action="{{ route('check') }}">
 
-    <div class="sm:flex items-center bg-white rounded-lg overflow-hidden px-2 py-1 justify-between">
-        <input class="text-base text-gray-400 flex-grow outline-none px-2 " autocomplete="off" type="text" placeholder="Serial Number" name="serial"/>
-        <button class="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin">
-            ADD
-        </button>
-    </div>
- 
-</form>
 <!--------------------------------------------------------------------------------------------->
 
 
@@ -53,43 +44,31 @@
                     <table class="min-w-full">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">CLAIM ID</th>
-                                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">DATE</th>
-                                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">PRODUCT</th>
+                                <th class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider">CUSTOMER ID</th>
                                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">NAME</th>
-                                <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">STATUS</th>
                                 <th class="px-6 py-3 border-b-2 border-gray-300"></th>
                             </tr>
                         </thead>
                         <tbody class="bg-white">
-                        @foreach($claimlists as $claimlist)
+                        @foreach($customers as $customer)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                                         <div class="flex items-center">
                                             <div>
-                                                <div class="text-sm leading-5 text-gray-800">{{ $claimlist->id }}</div>
+                                                <div class="text-sm leading-5 text-gray-800">{{ $customer->id }}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                        <div class="text-sm leading-5 text-blue-900">{{ $claimlist->date}}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ $claimlist->warranty->product->name }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ $claimlist->warranty->user->name }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                                        <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span class="relative text-xs">{{ $claimlist->status }}</span>
-                                    </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
-                                    
+                                    <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ $customer->name }}</td>
+
+                                    <td lass="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                                    )
                                         <button class="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">
-                                            <a href="{{ route('claims.show', ['claim'=> $claimlist->id]) }}" >
+                                            <a href="{{ route('claims.show', ['customer'=> $customer->id]) }}" >
                                                 View Details
                                             </a>
                                         </button>
-                                    
+                                   
                                     </td>
                                 </tr>
                             @endforeach

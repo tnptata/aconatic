@@ -19,7 +19,7 @@
         <div class="text-sm lg:flex-grow">
 
 
-            <a href="{{ route('indexcustomer') }}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+            <a href="{{ route('products.index') }}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                 PRODUCT
             </a>
 
@@ -27,12 +27,12 @@
 
             @if (Auth::check())
             
-            @if (!Auth::user()->isCustomer())
+            
             
             <a href="{{ route('claims.index') }}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                 SERVICE & SUPPORT
             </a>
-            @endif
+            
             
 
             @endif
@@ -46,17 +46,7 @@
                 {{Auth::user()->name }}
             </div>
             
-            @if (Auth::user()->isCustomer())
-            <div class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 mr-4">
-                @if (Auth::user()->money() <= 0)
-                <h1>
-                    Balance 0 Baht
-                </h1>
-                @else
-                    Balance{{Auth::user()->money }} Baht
-                @endif
-            </div>
-            @endif
+           
             
             <form action="{{ route('logout') }}" method="post" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                 @csrf
@@ -66,13 +56,8 @@
                 </button>
             </form>
 
-            @else
-            <a href="{{route('login')}}" class="text-sm block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                LOGIN
-            </a>
-            <a href="{{route('register')}}" class="text-sm block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                REGISTER
-            </a>
+
+            
             
             @endif
         </div>

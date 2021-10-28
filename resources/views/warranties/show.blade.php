@@ -26,7 +26,7 @@
             Full name
         </p>
         <p>
-            {{ $warranty->user->name}}
+            {{ $warranty->customer->name}}
         </p>
     </div>
     <div class="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">

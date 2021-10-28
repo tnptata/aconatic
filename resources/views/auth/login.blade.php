@@ -1,5 +1,4 @@
-@extends('layouts.main')
-@section('content')
+
 <body class="bg-gradient-to-r from-blue-200 via-red-100 to-pink-300 w-full h-full z-10 overflow-hidden">
 
 <x-guest-layout>
@@ -66,4 +65,3 @@
 </x-guest-layout>
 </body>
 
-@endsection

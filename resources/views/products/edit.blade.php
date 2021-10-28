@@ -76,7 +76,7 @@
                     </div>
                     <div class="inline-flex items-end">
                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                        <a href="{{ route('indexcustomer') }}">
+                        <a href="{{ route('products.index') }}">
                             Cancel
                         </a>
                     </button>

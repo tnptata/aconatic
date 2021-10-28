@@ -3,11 +3,11 @@
 
     
 @section('content')
-@can('create', \App\Models\Product::class)
+
 <div class="mt-5">
     <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Product</a>
 </div>
-@endcan
+
 
 <div x-data="{ cartOpen: false , isOpen: false }" class="bg-white">
     

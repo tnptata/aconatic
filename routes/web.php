@@ -29,7 +29,6 @@ Route::resource('claims',\App\Http\Controllers\ClaimlistController::class)
 Route::resource('warranties',\App\Http\Controllers\WarrantyController::class);
 Route::get('warranties/{warranty}/claim/create',[\App\Http\Controllers\WarrantyController::class,'createClaim'])->name('warranties.claim.create');
 
-Route::get('indexcustomer', [\App\Http\Controllers\ProductController::class,'indexcustomer'])->name('indexcustomer');
 
 Route::get('grouptelevision', [\App\Http\Controllers\ProductController::class,'grouptelevision'])->name('grouptelevision');
 
@@ -39,11 +38,11 @@ Route::get('groupportair', [\App\Http\Controllers\ProductController::class,'grou
 
 Route::get('groupcamera', [\App\Http\Controllers\ProductController::class,'groupcamera'])->name('groupcamera');
 
-Route::get('showproduct', [\App\Http\Controllers\ProductController::class,'showproduct'])->name('showproduct');
 Route::get('officer', [\App\Http\Controllers\ClaimlistController::class,'officer'])->name('officer');
 
 Route::get('check', [\App\Http\Controllers\WarrantyController::class,'check'])->name('check');
 
+Route::resource('customers',\App\Http\Controllers\CustomerController::class);
 
 
 
