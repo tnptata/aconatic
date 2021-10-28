@@ -32,6 +32,9 @@
             <a href="{{ route('claims.index') }}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                 SERVICE & SUPPORT
             </a>
+            <a href="{{ route('customers.index') }}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                CUSTOMER
+            </a>
             
             
 

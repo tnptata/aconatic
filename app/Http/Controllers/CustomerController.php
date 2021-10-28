@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -14,7 +15,12 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check()){
+            $customers = Customer::get();
+        return view('customers.index',['customers' => $customers]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -24,7 +30,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('customers.create');
     }
 
     /**
@@ -35,7 +42,10 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $customer = new Customer();
+        $customer->name = $request->input('name');
+        $customer->save();
+        return redirect()->route('customers.index');
     }
 
     /**
