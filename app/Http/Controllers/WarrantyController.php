@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Claimlist;
 use Illuminate\Http\Request;
+use App\Http\Requests\WarrantyRequest;
 use Illuminate\Support\Facades\Auth;
 
 class WarrantyController extends Controller
@@ -58,7 +59,7 @@ class WarrantyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WarrantyRequest $request)
     {
         if(Auth::check()){
             $product = Product::where('name','=',$request->input('product'))->first();

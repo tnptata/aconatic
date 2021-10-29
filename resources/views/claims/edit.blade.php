@@ -68,14 +68,9 @@
                 เงื่อนไข  
             </p>
               <input type="text" name="repair_condition" 
-              class="border-2 p-2 @error('repair_condition') border-red-400 @enderror" 
+              class="border-2 p-2" 
               value="{{ old('repair_condition', $claimlist->repair_condition) }}"
               autocomplete="off">
-              @error('repair_condition')
-                <div class="text-red-600">
-                {{$message}}
-                </div>
-            @enderror
         </div>
     </div>
     <button class="bg-red-500 text-white text-base rounded-lg px-4 py-2 font-thin ">

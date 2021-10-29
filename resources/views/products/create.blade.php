@@ -49,8 +49,13 @@
                     <label for="detail">Detail</label>
                     <div class="w-full md:w-full px-3 mb-2 mt-2">
                          <input type="text" class="h-20 border mt-1 rounded px-4 w-full bg-gray-50  @error('detail') border-red-400 @enderror" 
-                         name="detail"  value="{{ old('detail') }}" required></input>
+                         name="detail"  value="{{ old('detail') }}" ></input>
                     </div> 
+                    @error('detail')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="md:col-span-3">
@@ -76,14 +81,14 @@
 
                 <div class="md:col-span-5 text-right">
                     <div class="inline-flex items-end">
-                        <button type="submit"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Submit</button>
-                    </div>
-                    <div class="inline-flex items-end">
                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                         <a href="{{ route('products.index') }}">
                             Cancel
                         </a>
                     </button>
+                    </div>
+                    <div class="inline-flex items-end">
+                        <button type="submit"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Submit</button>
                     </div>
                 </div>
                 </div>

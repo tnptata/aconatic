@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClaimlistRequest extends FormRequest
+class WarrantyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,15 @@ class ClaimlistRequest extends FormRequest
     public function rules()
     {
         return [
-            'damage' => ['required', 'min:2'],
+            'start_date' => ['required'],
+            'expire_date' => ['required'],
         ];
     }
-    public function messages(){
+
+    public function messages() {
         return [
-            'damage.required' => 'Please fill damage. ',
-            'repair_condition.required' => 'Please fill repair condition.',
-            'damage.min' => 'Enter damage at least 2 characters.',
+            'start_date.required' => "Please enter start date.",
+            'expire_date.required' => "Please enter expire date.",
         ];
     }
 }
