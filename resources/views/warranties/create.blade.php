@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('warranties.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
     <div class="container max-w-screen-lg mx-auto">
@@ -19,6 +19,24 @@
                 <div class="md:col-span-5">
                     <label for="name">Customer Name</label>
                     <input type="text" name="name" id="name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('name') }}" />
+                    @if(session()->has('customerError'))
+                    <div class="text-red-600">
+                            {{ session()->get('customerError') }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="md:col-span-5">
+                    <label for="product">Product</label>
+                    <input type="text" name="product" id="product" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('product') }}" />
+                    @if(session()->has('productError'))
+                        <div class="text-red-600">
+                            {{ session()->get('productError') }}
+                        </div>
+                    @endif
+                </div>
+                <div class="md:col-span-5">
+                    <label for="product">Start Date</label>
+                    <input type="date" name="start_date" id="start_date" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('start_date') }}" />
                     @error('name')
                         <div class="text-red-600">
                             {{ $message }}
@@ -26,33 +44,14 @@
                     @enderror
                 </div>
                 <div class="md:col-span-5">
-                    <label for="name">Phone number</label>
-                    <input type="text" name="tel" id="tel" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('tel') }}" />
-                    @error('tel')
+                    <label for="product">Expire Date</label>
+                    <input type="date" name="expire_date" id="expire_date" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('expire_date') }}" />
+                    @error('name')
                         <div class="text-red-600">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="md:col-span-5">
-                    <label for="name">Email</label>
-                    <input type="text" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('email') }}" />
-                    @error('email')
-                        <div class="text-red-600">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="md:col-span-5">
-                    <label for="name">Address</label>
-                    <input type="text" name="address" id="address" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('address') }}" />
-                    @error('address')
-                        <div class="text-red-600">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
 
 
 
@@ -62,7 +61,7 @@
                     </div>
                     <div class="inline-flex items-end">
                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                        <a href="{{ route('customers.index') }}">
+                        <a href="{{ route('warranties.index') }}">
                             Cancel
                         </a>
                     </button>

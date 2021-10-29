@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
@@ -42,10 +43,17 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $customer = new Customer();
-        $customer->name = $request->input('name');
-        $customer->save();
-        return redirect()->route('customers.index');
+        if(Auth::check()){
+            $customer = new Customer();
+            $customer->name = $request->input('name');
+            $customer->tel = $request->input('tel');
+            $customer->email = $request->input('email');
+            $customer->address = $request->input('address');
+            $customer->save();
+            return redirect()->route('customers.index');
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -54,9 +62,17 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show($id)
     {
-        //
+        if(Auth::check()){
+            $customer = Customer::findOrFail($id);
+            return view('customers.show',[
+                'customer' => $customer,
+                
+            ]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -65,9 +81,14 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit($id)
     {
-        //
+        if(Auth::check()){
+            $customer = Customer::findOrFail($id);
+            return view('customers.edit',['customer' => $customer]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -77,9 +98,19 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $id)
     {
-        //
+        if(Auth::check()){
+            $customer = Customer::findOrFail($id);
+            $customer->name = $request->input('name');
+            $customer->tel = $request->input('tel');
+            $customer->email = $request->input('email');
+            $customer->address = $request->input('address');
+            $customer->save();
+            return redirect()->route('customers.show', ['customer'=> $customer->id]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**

@@ -27,6 +27,10 @@
                     </select>
                 </div>
             </div>
+            <div class="md:col-span-5">
+                    <label for="product">Cost</label>
+                    <input type="text" name="cost" id="cost" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ old('cost') }}" />
+                </div>
             <div class="w-full md:w-full px-3 mb-2 mt-2">
                 <input class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="damage" placeholder='กรอกสภาพสินค้า' required>
             </div>

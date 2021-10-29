@@ -14,6 +14,9 @@ class Claimlist extends Model
     public function warranty(){
         return $this->belongsTo(Warranty::class,'warranty_id','serial_number');
     }
-    
+    public function receipt()
+    {
+        return $this->hasOne(Receipt::class);
+    }
 
 }

@@ -16,7 +16,7 @@ class Warranty extends Model
         return $this->belongsTo(Product::class);
     }
     public function customer(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Customer::class);
     }
 
 }

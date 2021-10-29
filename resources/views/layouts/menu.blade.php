@@ -35,8 +35,9 @@
             <a href="{{ route('customers.index') }}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                 CUSTOMER
             </a>
-            
-            
+            <a href="{{ route('warranties.index') }}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                WARRANTY
+            </a>
 
             @endif
 

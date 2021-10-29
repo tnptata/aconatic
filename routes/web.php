@@ -18,11 +18,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('claims.index');
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('products',\App\Http\Controllers\ProductController::class);
-
+Route::resource('users',\App\Http\Controllers\UserController::class);
+Route::resource('receipts',\App\Http\Controllers\ReceiptController::class);
 Route::resource('claims',\App\Http\Controllers\ClaimlistController::class)
 ->middleware('auth');
 
@@ -41,7 +42,6 @@ Route::get('groupcamera', [\App\Http\Controllers\ProductController::class,'group
 Route::get('officer', [\App\Http\Controllers\ClaimlistController::class,'officer'])->name('officer');
 
 Route::get('check', [\App\Http\Controllers\WarrantyController::class,'check'])->name('check');
-
 Route::resource('customers',\App\Http\Controllers\CustomerController::class);
 
 

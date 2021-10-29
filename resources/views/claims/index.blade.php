@@ -21,7 +21,11 @@
             ADD
         </button>
     </div>
- 
+    @if(session()->has('notfound'))
+                        <div class="text-red-600">
+                            {{ session()->get('notfound') }}
+                        </div>
+    @endif
 </form>
 <!--------------------------------------------------------------------------------------------->
 
@@ -75,7 +79,7 @@
                                         <div class="text-sm leading-5 text-blue-900">{{ $claimlist->date}}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ $claimlist->warranty->product->name }}</td>
-                                    <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ $claimlist->warranty->user->name }}</td>
+                                    <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ $claimlist->warranty->customer->name }}</td>
                                     <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                                         <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>

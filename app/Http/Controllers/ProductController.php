@@ -23,8 +23,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest('created_at')->get();
-        return view('products.index', ['products' => $products]);
+        if(Auth::check()){
+            $products = Product::latest('created_at')->get();
+            return view('products.index', ['products' => $products]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
 
@@ -36,9 +40,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-
-        $product_types = Product::$product_types;
-        return view('products.create', ['product_types' => $product_types]);
+        if(Auth::check()){
+            $product_types = Product::$product_types;
+            return view('products.create', ['product_types' => $product_types]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -49,21 +56,24 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-
-        $product = new Product();
-        $product->name = $request->input('name');
-        $product->cost = $request->input('cost');
-        $product->detail = $request->input('detail');
-        $product->type = $request->input('type');
-        if ($request->hasFile('product_image')) {
-            $file = $request->file('product_image');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
-            $file->move('uploads/products/', $filename);
-            $product->product_image = $filename;
+        if(Auth::check()){
+            $product = new Product();
+            $product->name = $request->input('name');
+            $product->cost = $request->input('cost');
+            $product->detail = $request->input('detail');
+            $product->type = $request->input('type');
+            if ($request->hasFile('product_image')) {
+                $file = $request->file('product_image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('uploads/products/', $filename);
+                $product->product_image = $filename;
+            }
+            $product->save();
+            return redirect()->route('products.index');
+        }else{
+            abort(403, 'Unauthorized action.');
         }
-        $product->save();
-        return redirect()->route('products.index');
     }
 
     /**
@@ -74,10 +84,13 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        $products = Product::latest('created_at')->get();
-        return view('products.show', ['product' => $product],['products' => $products]);
-        
+        if(Auth::check()){
+            $product = Product::findOrFail($id);
+            $products = Product::latest('created_at')->get();
+            return view('products.show', ['product' => $product],['products' => $products]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -88,11 +101,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
+        if(Auth::check()){
+            $product = Product::findOrFail($id);
 
-        return view('products.edit', [
-            'product' => $product
-        ]);
+            return view('products.edit', [
+                'product' => $product
+            ]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /**
@@ -104,26 +121,29 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-        
-        $product = Product::findOrFail($id);
+        if(Auth::check()){
+            $product = Product::findOrFail($id);
 
-        $product->name= $request->input('name');
-        $product->cost = $request->input('cost');
-        $product->detail = $request->input('detail');
-        if ($request->hasFile('product_image')) {
-            $destination = 'uploads/products/'.$product->product_image;
-            if(File::exists($destination))
-            {
-                File::delete($destination);
-            }           
-            $file = $request->file('product_image');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
-            $file->move('uploads/products/', $filename);
-            $product->product_image = $filename;
+            $product->name= $request->input('name');
+            $product->cost = $request->input('cost');
+            $product->detail = $request->input('detail');
+            if ($request->hasFile('product_image')) {
+                $destination = 'uploads/products/'.$product->product_image;
+                if(File::exists($destination))
+                {
+                    File::delete($destination);
+                }           
+                $file = $request->file('product_image');
+                $extention = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extention;
+                $file->move('uploads/products/', $filename);
+                $product->product_image = $filename;
+            }
+            $product->save();
+            return redirect()->route('products.show', ['product' => $id]);
+        }else{
+            abort(403, 'Unauthorized action.');
         }
-        $product->save();
-        return redirect()->route('products.show', ['product' => $id]);
     }
 
     /**
@@ -144,26 +164,42 @@ class ProductController extends Controller
 
     public function grouptelevision()
     {
-        $products = Product::latest('cost')->get();
-        return view('products.grouptelevision', ['products' => $products]);
+        if(Auth::check()){
+            $products = Product::latest('cost')->get();
+            return view('products.grouptelevision', ['products' => $products]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     public function groupspeaker()
     {
-        $products = Product::latest('cost')->get();
-        return view('products.groupspeaker', ['products' => $products]);
+        if(Auth::check()){
+            $products = Product::latest('cost')->get();
+            return view('products.groupspeaker', ['products' => $products]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     public function groupportair()
     {
-        $products = Product::latest('cost')->get();
-        return view('products.groupportair', ['products' => $products]);
+        if(Auth::check()){
+            $products = Product::latest('cost')->get();
+            return view('products.groupportair', ['products' => $products]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     public function groupcamera()
     {
-        $products = Product::latest('cost')->get();
-        return view('products.groupcamera', ['products' => $products]);
+        if(Auth::check()){
+            $products = Product::latest('cost')->get();
+            return view('products.groupcamera', ['products' => $products]);
+        }else{
+            abort(403, 'Unauthorized action.');
+        }
     }
 
 

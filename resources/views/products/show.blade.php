@@ -5,11 +5,11 @@
 @section('content')
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     
-    @can('update', $product)
+    
     <div class="mt-5">
     <a href="{{ route('products.edit' , ['product' => $product->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Product</a>
     </div>
-    @endcan
+    
 
     <div x-data="{ cartOpen: false , isOpen: false }" class="bg-white">
         <header>
@@ -18,9 +18,7 @@
                     <div class="hidden w-full text-gray-600 md:flex md:items-center">
                         
                     </div>
-                    <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
-                        Aconasonic SHOP
-                    </div>
+
                     
                     </div>
                 </div>
