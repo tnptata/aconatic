@@ -16,9 +16,9 @@
 <form action="{{ route('check') }}">
 
     <div class="sm:flex items-center bg-white rounded-lg overflow-hidden px-2 py-1 justify-between">
-        <input class="text-base text-gray-400 flex-grow outline-none px-2 " autocomplete="off" type="text" placeholder="Serial Number" name="serial"/>
+        <input class="text-base text-gray-400 flex-grow outline-none px-2 " autocomplete="off" type="text" placeholder="Warranty serial number for add new claim" name="serial"/>
         <button class="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin">
-            ADD
+            Search
         </button>
     </div>
     @if(session()->has('notfound'))

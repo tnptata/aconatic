@@ -41,9 +41,16 @@
                 </svg>
                 
                 </div>
+                <div>
+                <button class="bg-red-500 text-white text-base rounded-lg px-4 py-2 font-thin ">
+                    <a href="{{ route('claims.index') }}" >
+                Cancel
+                </a>
+                </button>
+                </div>
                 <div class="-mr-1">
-                    <button class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100">
-                            add     
+                    <button class="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin ">
+                            Add     
                     </button>
                 </div>
             </div>

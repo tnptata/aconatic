@@ -54,6 +54,11 @@
             </p>
         </div>
     </div>
+    <button class="bg-red-500 text-white text-base rounded-lg px-4 py-2 font-thin ">
+        <a href="{{ route('claims.index') }}" >
+            Back to claimlist
+        </a>
+    </button>
     <button class="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin ">
         <a href="{{ route('claims.edit', ['claim'=> $claimlist->id]) }}" >
             EDIT
